@@ -92,10 +92,8 @@ class DMart:
                 error=Error(
                     type="dmart",
                     code=260,
-                    message=[
-                        {"endbpoint": endpoint},
-                        {"response": message},
-                    ],
+                    message=f"{message} AT {endpoint}",
+                    info=resp_json.get("error", {}).get("info", None),
                 ),
             )
 
