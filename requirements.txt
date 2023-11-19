@@ -1,5 +1,4 @@
 python-json-logger
-json_logging
 fastapi
 pydantic
 pyjwt

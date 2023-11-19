@@ -3,7 +3,6 @@ from models.enums import Space
 from utils.settings import settings
 from enum import Enum
 from typing import Any
-import json_logging
 from fastapi import status
 from api.schemas.response import ApiException, Error
 
@@ -29,7 +28,6 @@ class DMart:
     def get_headers(self):
         return {
             "Content-Type": "application/json",
-            "X-Correlation-ID": json_logging.get_correlation_id(),
             "Authorization": f"Bearer {self.auth_token}",
         }
 

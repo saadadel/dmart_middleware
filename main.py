@@ -10,7 +10,6 @@ from datetime import datetime
 from os.path import exists
 from typing import Any
 from asgi_correlation_id import CorrelationIdMiddleware
-import json_logging
 from fastapi import Depends, FastAPI, Request, Response, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
@@ -43,8 +42,6 @@ from utils.settings import settings
 import socket
 import subprocess
 from api.auth.router import router as auth
-
-json_logging.init_fastapi(enable_json=True)
 
 app = FastAPI(
     title="Dmart Middleware API",
@@ -109,7 +106,6 @@ async def my_exception_handler(_, exception):
     return MainResponse(
         content=exception.detail,
         status_code=exception.status_code,
-        headers={"correlation_id": json_logging.get_correlation_id()},
     )
 
 
@@ -159,7 +155,7 @@ async def middle(request: Request, call_next):
             exception_data = {"props": {"exception": str(ex), "stack": stack}}
             response_body = json.loads(response.body.decode())
         except ValidationError as e:
-            stack = [
+                                                                                    stack = [
                 {
                     "file": frame.f_code.co_filename,
                     "function": frame.f_code.co_name,
