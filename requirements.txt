@@ -9,7 +9,6 @@ hypercorn
 aiohttp
 passlib[bcrypt]
 pytest
-pytest-asyncio
 requests
 cryptography
 asgi_correlation_id
